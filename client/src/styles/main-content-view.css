@@ -1,0 +1,40 @@
+.main-content-view
+{
+    flex: 1;
+    overflow-x: hidden;
+}
+
+
+.categories-container 
+{
+    position: sticky;
+    top: 0;
+    padding-top: 8px;
+    display: flex;
+    margin-right: 3%;
+    margin-left: 3%;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+.recent-albums-container 
+{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: clamp(80px, 10%, 100px);    
+}
+
+.flex-align-left{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-content-margin-space
+{
+    margin: 20px 0px;
+}

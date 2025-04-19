@@ -12,9 +12,13 @@
   -moz-osx-font-smoothing: grayscale;
 
   --green: #1db954;
+  --background-base: #121212;
+  --background-highlight: #1f1f1f;
+  --background-lighter-base: #1f1f1f;
   --black: #212121;
   --dark-black: #121212;
   --dark-gray: #535353;
+  --tinted-gray: #ffffff1a;
   --light-gray: #b3b3b3;
 
   --hover-black: #292929;
@@ -25,7 +29,33 @@
 }
 
 body{
-  background-color: var(--dark-black);
+  background-color: black;
+}
+
+.app-content-view
+{
+  display: flex;
+  gap: 20px;
+}
+
+.view-container-base
+{
+  background-color: var(--background-base);
+  border-radius: 5px;
+  height: 80vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.view-container-scroll-bar::-webkit-scrollbar
+{
+  background-color: transparent;
+}
+
+.view-container-scroll-bar::-webkit-scrollbar-thumb
+{
+  background-color: var(--dark-gray);
+  max-height: 20px;
 }
 
 
@@ -46,9 +76,11 @@ body {
   min-height: 100vh; */
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
   /* font-size: 3.2em;
   line-height: 1.1; */
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -64,13 +96,7 @@ button {
 }
 
 
-button:hover {
-  /* border-color: #646cff; */
-}
-button:focus,
-button:focus-visible {
-  /* outline: 4px auto -webkit-focus-ring-color; */
-}
+
 
 @media (prefers-color-scheme: light) {
   /* :root {

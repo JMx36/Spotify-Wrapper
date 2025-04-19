@@ -1,8 +1,18 @@
 import React from 'react'
+import CategoriesBtn from './CategoriesBtn'
 
-const CategoriesScroller = () => {
+interface CategoriesScrollerProp {
+  buttons : string[]
+}
+
+const CategoriesScroller = ({ buttons } : CategoriesScrollerProp) => {
   return (
-    <div>CategoriesScroller</div>
+    <div className='categories-scroller'>
+        {
+          buttons.map((text, index) => <CategoriesBtn text={text} key={index}/>)
+        }
+
+    </div>
   )
 }
 

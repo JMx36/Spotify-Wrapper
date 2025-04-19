@@ -1,0 +1,61 @@
+.click-scroller 
+{
+    position: relative;
+    margin-inline: -45px calc(-12px + -1* calc(40px + -12px + max(0px, (100cqi - 1955px) * 0.5)));
+}
+
+.click-scroller .scroll-container
+{
+    display: flex;
+    overflow: hidden;
+    /* max-width: 100%; */
+    /* gap: 20px;s */
+    overflow-x: auto;
+    position: relative;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 28px;
+    scroll-padding-right: 28px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 28px;
+}
+
+.click-scroller::before, .click-scroller::after
+{
+    content: "";
+    background: linear-gradient(90deg, #121212 0, transparent 100%);;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 2;
+    transition: opacity .15s ease-out;
+}
+
+.click-scroller::after
+{
+    background: linear-gradient(-90deg, #121212 0, transparent 100%);;
+    right: 0;
+    transition: opacity .15s ease-out;
+}
+
+.click-scroller::before
+{
+    background: linear-gradient(90deg, #121212 0, transparent 100%);;
+    left: 0;
+    transition: opacity .15s ease-out;
+}
+
+
+.click-scroller .scroll-container::-webkit-scrollbar
+{
+  background-color: transparent;
+  max-height: 0px;
+}
+
+.click-scroller .scroll-container::-webkit-scrollbar-thumb
+{
+  background-color: transparent;
+  
+}
