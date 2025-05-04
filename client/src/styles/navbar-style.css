@@ -37,12 +37,31 @@
     align-items: center;
     border-radius: 50%;
     background-color: var(--black);
+    color: white;
 }
 
 .navbar-btn .btn-logo
 {
     width: 60%;
     aspect-ratio: 1/1;
+}
+
+#navbar .profile-icon
+{
+    width: 80%;
+    aspect-ratio: 1/1;
+}
+
+#navbar .profile-icon-text
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: black;
+    line-height: 1;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 #navbar .middle-section
@@ -95,11 +114,6 @@
     background-color: var(--hover-black);
     outline: 1px solid rgba(128, 128, 128, 0.785);
     /* box-shadow: 0 0 0 0.1px white; */
-}
-
-#navbar .profile-icon
-{
-    width: 80%;
 }
 
 .navbar-form-icon

@@ -6,10 +6,10 @@
 
 .click-scroller .scroll-container
 {
+    /* gap: 20px; */
+    /* max-width: 100%; */
     display: flex;
     overflow: hidden;
-    /* max-width: 100%; */
-    /* gap: 20px;s */
     overflow-x: auto;
     position: relative;
     overscroll-behavior-x: contain;
@@ -24,7 +24,6 @@
 .click-scroller::before, .click-scroller::after
 {
     content: "";
-    background: linear-gradient(90deg, #121212 0, transparent 100%);;
     position: absolute;
     top: 0;
     bottom: 0;

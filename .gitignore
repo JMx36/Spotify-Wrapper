@@ -1,3 +1,6 @@
+# secrets
+server/secrets/
+
 # Logs
 logs
 *.log

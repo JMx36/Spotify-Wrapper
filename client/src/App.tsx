@@ -6,6 +6,7 @@ import { Route, createBrowserRouter,
 import './App.css'
 import MainLayout from './layouts/MainLayout';
 import HomePage from './pages/HomePage';
+import { UserProvider } from './hooks/useUserContext';
 
 
 const router = createBrowserRouter(
@@ -21,7 +22,9 @@ const router = createBrowserRouter(
 function App() {
   
   return (
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   )
 }
 
