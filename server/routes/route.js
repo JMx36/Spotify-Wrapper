@@ -79,7 +79,7 @@ async function internal_TokenHandler(type = 'new', code = ''){
 
     try {
         
-        if (isRefresh && !refreshToken)
+        if (isRefresh && !refresh_token)
         {
             throw new Error('No Refresh Token found');
         }
@@ -173,8 +173,8 @@ async function makeAPIRequest(url, res){
 
         const token_req_data = await refreshToken(); 
         
-        console.log('Refresh Token request')
-        console.log(token_req_data)
+        // console.log('Refresh Token request')
+        // console.log(token_req_data)
 
         if (!token_req_data.success)
         {

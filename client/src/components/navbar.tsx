@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react'
+import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react'
 import SpotifyLogo from '../assets/spotify-logo.svg'
 import HomeLogo from '../assets/home.svg'
 // import SearchLogo from '../assets/search.svg'
@@ -40,12 +40,18 @@ const handleUserImage = (data: any) => {
                         </span>
 };
 
+// enum LoginState {
+//   CheckingStatus,
+//   FetchedError, 
+//   TimedOut,
+//   Neutral
+// }
+
 
 const Navbar = () => {
 
   const [isInputFocus, SetInputFocus] = useState<boolean>(false);
-  const [userFetchError, setUserFetchError] = useState<boolean>(false);
-  const [loginStatusRetryAttempted , setLoginStatusRetryAttempted] = useState<boolean>(false);
+  // const [logingState, setLoginState] = useState<LoginState>(LoginState.Neutral);
 
   const loginReqConfigs = useMemo( ()=> {
           return   {
@@ -85,57 +91,49 @@ const Navbar = () => {
 
     console.log('Login Data', loginReq.data);
     console.log('Is user logged in?', user.loggedIn);
-    console.log('Is there user data error', userFetchError);
-    console.log('Login Check attempted', loginStatusRetryAttempted);
 
+    // only return if user is logged in and there was no error in the userReq
 
-    if (userFetchError && !loginStatusRetryAttempted) 
+    if (loginReq.error && user.loggedIn)
     {
-      console.log('User is logged in but user data was not received. Checking if we are still logged in...')
-      loginReq.refetch();
-      setLoginStatusRetryAttempted (true);
+      console.warn('Logging out');
+      userContext.logout();
       return;
     }
 
-    // only return if user is logged in and there was no error in the userReq
-    if (user.loggedIn && !userFetchError) 
-    {
-      console.log('Logged in or login attempted early exit');
-      return; 
+    if (!loginReq.data){
+      console.warn('No Loggin request data');
+      return;
     }
 
-    if (loginReq.data && loginReq.data.status)
+    if (loginReq.data.status)
     {
       console.log('Successfully Logged in');
       userContext.login({loggedIn : true});
-      setUserFetchError(false);
-      setLoginStatusRetryAttempted (false);
+      console.log('fetching user data');
+      userInfoReq.refetch();
     }
 
-    else if (userFetchError)
+    else if (user.loggedIn) 
     {
-      setUserFetchError(false);
+      console.log('Forced Logging out');
       userContext.logout();
     }
 
-  }, [user, loginReq.data, userFetchError])
+  }, [loginReq.data, loginReq.error])
+
 
   useEffect(() => {
 
-      if (user.loggedIn && !userFetchError)
-      {
-        console.log('fetching user data');
-        userInfoReq.refetch();
-      }
+    if (!userInfoReq.error) return; // no error exit
 
-      if (userInfoReq.error &&  userInfoReq.error !== 'CanceledError' && !userFetchError && !loginStatusRetryAttempted){
-        console.log('Set print error to true');
-        setUserFetchError(true);
-        return;
-      }
+    if (userInfoReq.error === 'CanceledError') return; // it is a canceled error
+  
+    console.log('User is logged in but user data was not received. Checking if we are still logged in...')
+    
+    loginReq.refetch();
 
-
-  }, [user, userInfoReq.error])
+  }, [userInfoReq.error])
 
   return (
     <nav id="navbar">
